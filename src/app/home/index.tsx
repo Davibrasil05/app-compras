@@ -1,9 +1,9 @@
 import { Button } from "@/components/Button"
-import { Input } from "@/components/Input"
-import { Image, Text, TouchableOpacity, View } from "react-native"
-
 import { Filter } from "@/components/Filter"
+import { Input } from "@/components/Input"
+import { Item } from "@/components/Item"
 import { FilterStatus } from "@/types/FilterStatus"
+import { Image, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./styles"
 
 const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE]
@@ -32,6 +32,7 @@ export default function App(){
                 </View>
 
             </View> 
+            <Item></Item>
         </View>
 
 
