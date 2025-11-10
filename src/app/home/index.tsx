@@ -31,8 +31,10 @@ export default function App(){
                     </TouchableOpacity>
                 </View>
 
+                <Item data={{status: FilterStatus.DONE, description: "café"}}
+                 onStatus={() => console.log("Mudar o Status")} 
+                 onRemove={() => console.log("Remover")}></Item>
             </View> 
-            <Item></Item>
         </View>
 
 
