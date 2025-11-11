@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { Button } from "@/components/Button"
 import { Filter } from "@/components/Filter"
 import { Input } from "@/components/Input"
@@ -14,20 +16,28 @@ const ITEMS = [
 ]
 
 export default function App(){
+    const [filter, setFilter] = useState(FilterStatus.PENDING)
+    const [description, setDescription] = useState("")
     return(
         <View style={styles.container}>
             
             <Image source={require("@/assets/logo.png")} style={styles.logo} />
 
             <View style={styles.form}>
-                <Input placeholder="O que você precisa comprar? "/>
+                <Input placeholder="O que você precisa comprar? " onChangeText={setDescription}/>
+                <Text>{description}</Text>
                 <Button title ="Entrar"/>
             </View>
 
             <View style={styles.content}>
                 <View style={styles.header}>
                     {FILTER_STATUS.map((status) =>( //Função que percorre a lista de estado de filtro (Inicia em PENDING, depois DONE) 
-                        <Filter key={status} status={status} isActive /> 
+                        <Filter
+                         key={status} 
+                         status={status} 
+                         isActive={status === filter}
+                         onPress={() => setFilter(status)}
+                        /> 
                     ))}
 
 
