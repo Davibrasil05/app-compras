@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Button } from "@/components/Button"
 import { Filter } from "@/components/Filter"
@@ -27,8 +27,11 @@ export default function App(){
             status: FilterStatus.PENDING,
 
         }
-        setItems((prevStatus) => [...prevStatus,newItem])
+        
     }
+    useEffect(() => {
+        console.log("useEffect")
+    }, [filter])
     return(
         <View style={styles.container}>
             
