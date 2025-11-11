@@ -5,19 +5,30 @@ import { Filter } from "@/components/Filter"
 import { Input } from "@/components/Input"
 import { Item } from "@/components/Item"
 import { FilterStatus } from "@/types/FilterStatus"
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native"
+import { Alert, FlatList, Image, Text, TouchableOpacity, View } from "react-native"
 import { styles } from "./styles"
 
-const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE]
-const ITEMS = [
-    {id: "1", status: FilterStatus.DONE, description: "1 pacote de café"},
-    {id: "2", status: FilterStatus.PENDING, description: "2 caixas de leite"},
-    {id: "3", status: FilterStatus.DONE, description: "3 sacos de arroz"},
-]
 
 export default function App(){
     const [filter, setFilter] = useState(FilterStatus.PENDING)
     const [description, setDescription] = useState("")
+    const FILTER_STATUS: FilterStatus[] = [FilterStatus.PENDING, FilterStatus.DONE]
+    const [items,setItems] = useState<any>([])
+    
+    function handleAdd(){
+        if(!description.trim()){
+            return Alert.alert("Adicionar", "Informe a descrição para adicionar")
+        }
+        
+
+        const newItem = {
+            id: Math.random().toString(36).substring(2),
+            description,
+            status: FilterStatus.PENDING,
+
+        }
+        setItems((prevStatus) => [...prevStatus,newItem])
+    }
     return(
         <View style={styles.container}>
             
@@ -25,8 +36,7 @@ export default function App(){
 
             <View style={styles.form}>
                 <Input placeholder="O que você precisa comprar? " onChangeText={setDescription}/>
-                <Text>{description}</Text>
-                <Button title ="Entrar"/>
+                <Button title ="Adicionar" onPress={handleAdd}/>
             </View>
 
             <View style={styles.content}>
@@ -46,13 +56,13 @@ export default function App(){
                     </TouchableOpacity>
                 </View>
                 <FlatList
-                    data={ITEMS}
+                    data={items}
                     keyExtractor={(item) => item.id}
                     renderItem={({item}) => (
                         <Item 
                         data={item}
-                         onStatus={() => console.log("Mudar o Status")} 
-                         onRemove={() => console.log("Remover")}></Item>
+                        onStatus={() => console.log("Mudar o Status")} 
+                        onRemove={() => console.log("Remover")}></Item>
 
                     )}
                     showsVerticalScrollIndicator={false}
