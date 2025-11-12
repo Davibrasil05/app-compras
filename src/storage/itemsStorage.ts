@@ -1,5 +1,6 @@
 import { FilterStatus } from "@/types/FilterStatus"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { Alert } from "react-native"
 
 const ITEMS_STORAGE_KEY = "@comprar:items" //chave
 
@@ -45,10 +46,23 @@ async function remove(id: string){
         const updatedItems = items.filter((item) => item.id !== id)
         await save(updatedItems)
 
+}
+
+function handleClear(){
+    Alert.alert("Limpar", "Deseja remmover todos?")
+}
+async function clear(): Promise<void>{
+    try{
+        await AsyncStorage.removeItem(ITEMS_STORAGE_KEY)
+    }catch(error){
+        throw new Error("ITEMS_CLEAR" + error)
+
     }
+}
 export const itemsStorage = {
     get,
     getByStatus,
     add,
     remove,
+    clear,
 }
