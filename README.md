@@ -1,6 +1,6 @@
 # Shopping List
 
-Aplicativo simples feito com **React Native**, **Expo** e **TypeScript** para gerenciar uma lista de compras. Meu primeiro prjeto toalmente voltado a mobile :)
+Aplicativo simples feito com **React Native**, **Expo** e **TypeScript** para gerenciar uma lista de compras. Meu primeiro projeto totalmente voltado a mobile :)
 
 ## Funcionalidades
 
