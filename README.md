@@ -31,7 +31,3 @@ Toda a lógica fica no `App.tsx`, incluindo:
 * remoção e limpeza
 
 A lista usa `FlatList` e o armazenamento é feito pelo módulo `itemsStorage`.
-
----
-
-Se quiser uma versão ainda mais curta, me diga!
