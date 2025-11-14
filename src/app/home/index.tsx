@@ -34,6 +34,8 @@ export default function App(){
         Alert.alert("Adicionado",`Adicionado ${description}`)
         setDescription("")
         setFilter(FilterStatus.PENDING)
+
+        await itemsByStatus()
     }
 
     async function itemsByStatus(){
@@ -70,6 +72,17 @@ export default function App(){
         }catch(error){
             console.log(error)
             Alert.alert("Erro", "Não foi possível limpar")
+        }
+    }
+
+
+    async function handleToggleItemStatus(id: string){
+        try{
+            await itemsStorage.toggleStatus(id)
+            await itemsByStatus()
+        }catch (error){
+            console.log(error)
+            Alert.alert("Erro" + error)
         }
     }
     useEffect(() => {
@@ -110,7 +123,7 @@ export default function App(){
                     renderItem={({item}) => (
                         <Item 
                         data={item}
-                        onStatus={() => console.log("Mudar o Status")} 
+                        onStatus={() => handleToggleItemStatus(item.id)} 
                         onRemove={() => handleRemove(item.id)}></Item>
 
                     )}
